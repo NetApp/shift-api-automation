@@ -1,8 +1,0 @@
-2025-04-16 20:57:26,588 - AddResourceGroup - INFO - Add resource group workflow started
-2025-04-16 20:57:28,195 - AddResourceGroup - INFO - Creating resource group(s) using GET /api/setup/protectiongroup API for source site e941b626-d198-4d2d-b37e-ac5ebcc132ce and destination site f2b3186c-42bc-4429-8d25-91bb6c09aa92
-2025-04-16 20:57:28,195 - AddResourceGroup - INFO - Getting site details by name using GET /api/setup/site API for e941b626-d198-4d2d-b37e-ac5ebcc132ce
-2025-04-16 20:57:28,647 - AddResourceGroup - INFO - Source site id created, Response code is 200
-2025-04-16 20:57:28,648 - AddResourceGroup - INFO - Getting site details by name using GET /api/setup/site API for f2b3186c-42bc-4429-8d25-91bb6c09aa92
-2025-04-16 20:57:29,099 - AddResourceGroup - INFO - Source site id created, Response code is 200
-2025-04-16 20:57:29,100 - AddResourceGroup - ERROR - Error retrieving site details for source or destination.
-2025-04-16 20:57:29,100 - AddResourceGroup - ERROR - Failed to create any resource group using POST /api/setup/protectionGroup API

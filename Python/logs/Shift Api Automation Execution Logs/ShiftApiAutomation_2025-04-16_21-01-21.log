@@ -1,9 +1,0 @@
-2025-04-16 21:01:21,563 - ShiftApiAutomation - INFO - Starting workflow 1
-2025-04-16 21:01:22,017 - ShiftApiAutomation - INFO - Starting execution for: shift_api_automation full migration check
-2025-04-16 21:01:22,017 - ShiftApiAutomation - INFO - Skipping site creation as per configuration.
-2025-04-16 21:02:57,307 - ShiftApiAutomation - INFO - Waiting for prepare vm to complete for blueprint id 4dacd799-2798-47ff-b734-60fc4d5dd1d7
-2025-04-16 21:02:57,307 - ShiftApiAutomation - INFO - Retrieving blueprint status using GET /api/recovery/drplan/status
-2025-04-16 21:02:58,056 - ShiftApiAutomation - INFO - Response code for Blueprint status is 200
-2025-04-16 21:02:58,057 - ShiftApiAutomation - INFO - Status is 5. Exiting wait after prepare vm failure.
-2025-04-16 21:02:58,057 - ShiftApiAutomation - ERROR - Prepare VM failed, cannot trigger migration.
-2025-04-16 21:02:58,513 - ShiftApiAutomation - INFO - Please find the logs of the execution in the latest file of the logs folder

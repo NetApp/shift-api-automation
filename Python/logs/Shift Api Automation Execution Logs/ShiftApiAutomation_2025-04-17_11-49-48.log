@@ -1,4 +1,0 @@
-2025-04-17 11:49:48,445 - ShiftApiAutomation - INFO - Starting workflow 1
-2025-04-17 11:49:48,899 - ShiftApiAutomation - INFO - Starting execution for: shift_api_automation full migration check
-2025-04-17 11:49:48,899 - ShiftApiAutomation - ERROR - An error occurred during migration workflows: 'dict' object has no attribute 'vmware_config'
-2025-04-17 11:49:48,899 - ShiftApiAutomation - INFO - Please find the logs of the execution in the latest file of the logs folder

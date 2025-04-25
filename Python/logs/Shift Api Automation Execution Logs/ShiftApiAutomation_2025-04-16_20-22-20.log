@@ -1,9 +1,0 @@
-2025-04-16 20:22:20,286 - ShiftApiAutomation - INFO - Starting workflow 1
-2025-04-16 20:22:20,753 - ShiftApiAutomation - INFO - Starting execution for: shift_api_automation full migration check
-2025-04-16 20:22:46,693 - ShiftApiAutomation - ERROR - No resource group id available, cannot create blueprint.
-2025-04-16 20:22:46,693 - ShiftApiAutomation - ERROR - No resource group id available, cannot create blueprint.
-2025-04-16 20:22:46,693 - ShiftApiAutomation - ERROR - No blueprint id available, cannot check status.
-2025-04-16 20:22:46,693 - ShiftApiAutomation - ERROR - No blueprint id available, cannot check status.
-2025-04-16 20:22:46,693 - ShiftApiAutomation - ERROR - Trigger migration failed: local variable 'prepare_vm_status' referenced before assignment
-2025-04-16 20:22:46,693 - ShiftApiAutomation - ERROR - Check migration status failed: local variable 'prepare_vm_status' referenced before assignment
-2025-04-16 20:22:47,149 - ShiftApiAutomation - INFO - Please find the logs of the execution in the latest file of the logs folder
