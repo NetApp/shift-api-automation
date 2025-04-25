@@ -1,0 +1,49 @@
+{
+    "executions": [
+      {
+        "execution_name": "",
+        "shift_server_ip": "",
+        "shift_username": "",
+        "shift_password": "",
+        "source_site_name": "",
+        "destination_site_name": "",
+        "migration_mode": "",
+        "vm_details": [
+          {
+            "name": "netplan_ubuntu",
+            "boot_order": 3,
+            "delay": 0,
+            "numCPUs": 2,
+            "memoryMB": 4096,
+            "ip": "",
+            "vmGeneration": "1",
+            "isSecureBootEnable": false,
+            "retainMacAddress": false,
+            "networkDetails": [
+              "",
+              ""
+            ],
+            "qtree_name": "",
+            "datastore_name": "",
+            "resource_group_name": "",
+            "ipAllocType": "",
+            "powerOnFlag": true,
+            "serviceAccountOverrideFlag": true,
+            "serviceAccount": {
+              "loginId": "",
+              "password": ""
+            }
+          }
+        ],
+        "blueprint_name": "",
+        "mappings": {
+          "Cluster05": "NIMHV001"
+        },
+        "ip_type": "",
+        "windows_loginId": "",
+        "windows_password": "",
+        "linux_loginId": "",
+        "linux_password": ""
+      }
+    ]
+  }

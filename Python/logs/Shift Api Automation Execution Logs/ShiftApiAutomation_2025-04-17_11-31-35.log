@@ -1,0 +1,8 @@
+2025-04-17 11:31:35,719 - ShiftApiAutomation - INFO - Starting workflow 1
+2025-04-17 11:31:36,172 - ShiftApiAutomation - INFO - Starting execution for: shift_api_automation full migration check
+2025-04-17 11:31:36,172 - ShiftApiAutomation - INFO - Skipping site creation as per configuration.
+2025-04-17 11:31:36,172 - ShiftApiAutomation - INFO - Skipping resource group creation as per configuration.
+2025-04-17 11:31:36,173 - ShiftApiAutomation - INFO - Skipping blueprint creation as per configuration.
+2025-04-17 11:31:36,173 - ShiftApiAutomation - INFO - Skipping migration trigger as per configuration.
+2025-04-17 11:31:37,836 - ShiftApiAutomation - INFO - Final migration status for blueprint create_blueprint_test: migration complete
+2025-04-17 11:31:38,285 - ShiftApiAutomation - INFO - Please find the logs of the execution in the latest file of the logs folder

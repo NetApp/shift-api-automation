@@ -1,0 +1,14 @@
+{
+  "title": "Create Blueprint Automation Script",
+  "description": "Automation Script for Creating Blueprint",
+  "type": "powershell",
+  "parameters": [
+    {
+      "name": "InputJson",
+      "type": "json",
+      "description": "Please provide the Blueprint details in JSON format",
+      "mandatory": true,
+      "value": ""
+    }
+  ]
+}

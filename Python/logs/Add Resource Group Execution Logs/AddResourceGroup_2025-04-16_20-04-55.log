@@ -1,0 +1,12 @@
+2025-04-16 20:04:55,154 - AddResourceGroup - INFO - Add resource group workflow started
+2025-04-16 20:04:55,154 - AddResourceGroup - INFO - Starting resource group workflow 1
+2025-04-16 20:04:55,610 - AddResourceGroup - INFO - Creating resource group(s) using GET /api/setup/protectiongroup API for source site add_site_test_source_final_test and destination site add_site_test_destination_final_test
+2025-04-16 20:04:55,610 - AddResourceGroup - INFO - Getting site details by name using GET /api/setup/site API for add_site_test_source_final_test
+2025-04-16 20:04:56,075 - AddResourceGroup - INFO - Source site id created, Response code is 200
+2025-04-16 20:04:56,075 - AddResourceGroup - ERROR - Site details for add_site_test_source_final_test are not found
+2025-04-16 20:04:56,075 - AddResourceGroup - INFO - Getting site details by name using GET /api/setup/site API for add_site_test_destination_final_test
+2025-04-16 20:04:56,522 - AddResourceGroup - INFO - Source site id created, Response code is 200
+2025-04-16 20:04:56,522 - AddResourceGroup - ERROR - Site details for add_site_test_destination_final_test are not found
+2025-04-16 20:04:56,522 - AddResourceGroup - ERROR - Error retrieving site details for source or destination.
+2025-04-16 20:04:56,522 - AddResourceGroup - ERROR - Failed to create any resource group using POST /api/setup/protectionGroup API
+2025-04-16 20:04:56,975 - AddResourceGroup - INFO - Please find the logs of the execution in the latest file of the logs folder

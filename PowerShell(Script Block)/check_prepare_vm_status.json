@@ -1,0 +1,14 @@
+{
+  "title": "Check Prepare VM Status Automation Script",
+  "description": "Automation Script for Checking Prepare VM Status",
+  "type": "powershell",
+  "parameters": [
+    {
+      "name": "InputJson",
+      "type": "json",
+      "description": "Please provide the Blueprint details in JSON format",
+      "mandatory": true,
+      "value": ""
+    }
+  ]
+}

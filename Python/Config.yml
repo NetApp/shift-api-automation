@@ -1,0 +1,23 @@
+add_site:
+  ifile : "/add_site.json"
+
+add_resource_group:
+  ifile : "/add_resource_group.json"
+
+check_migration_status:
+  ifile : "/check_migration_status.json"
+
+create_blueprint:
+  ifile : "/create_blueprint.json"
+
+check_prepare_vm_status:
+  ifile : "/check_prepare_vm_status.json"
+
+run_compliance_check:
+  ifile : "/run_compliance_check.json"
+
+shift_api_automation:
+  ifile : "/shift_api_automation.json"
+
+trigger_migration:
+  ifile : "/trigger_migration.json"

@@ -1,0 +1,3 @@
+2025-04-16 20:15:05,491 - CheckMigrationStatus - INFO - Starting migration status check workflow 1
+2025-04-16 20:15:05,492 - CheckMigrationStatus - ERROR - Missing blueprint or execution id for migration status check index 1. Skipping this migration status check.
+2025-04-16 20:15:05,492 - CheckMigrationStatus - INFO - Please find the logs of the execution in the latest file of the logs folder

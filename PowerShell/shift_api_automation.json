@@ -1,0 +1,75 @@
+{
+  "executions": [
+    {
+      "execution_name": "",
+      "shift_server_ip": "",
+      "shift_username": "",
+      "shift_password": "",
+      "source_site_name": "",
+      "destination_site_name": "",
+      "vmware_config": {
+        "endpoint": "",
+        "username": "",
+        "password": "",
+        "skip_vmware_sll_validation": true
+      },
+      "ontap_config": {
+        "endpoint": "",
+        "username": "",
+        "password": "",
+        "skip_ontap_sll_validation": true
+      },
+      "hyperv_config": {
+        "endpoint": "",
+        "username": "",
+        "password": "",
+        "endpoint_type": ""
+      },
+      "migration_mode": "",
+      "vm_details": [
+          {
+            "name": "",
+            "boot_order": 3,
+            "delay": 0,
+            "numCPUs": 2,
+            "memoryMB": 4096,
+            "ip": "",
+            "vmGeneration": "1",
+            "isSecureBootEnable": false,
+            "retainMacAddress": false,
+            "networkDetails": [
+              "",
+              ""
+            ],
+            "qtree_name": "",
+            "datastore_name": "",
+            "resource_group_name": "",
+            "ipAllocType": "",
+            "powerOnFlag": true,
+            "serviceAccountOverrideFlag": true,
+            "serviceAccount": {
+              "loginId": "",
+              "password": ""
+            }
+          }
+      ],
+      "blueprint_name": "",
+      "mappings": {
+        "": ""
+      },
+      "ip_type": "",
+      "windows_loginId": "",
+      "windows_password": "",
+      "linux_loginId": "",
+      "linux_password": "",
+      "do_create_sites": true,
+      "do_add_resource_group": true,
+      "do_create_blueprint": true,
+      "do_compliance": true,
+      "do_prepare_vm": true,
+      "do_trigger_migration": true,
+      "do_check_status": true,
+      "execution_id": ""
+    }
+  ]
+}

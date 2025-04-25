@@ -1,0 +1,14 @@
+{
+  "title": "Add Site Automation Script",
+  "description": "Automation Script for Adding Source and Destination sites",
+  "type": "powershell",
+  "parameters": [
+    {
+      "name": "InputJson",
+      "type": "json",
+      "description": "Please provide the Source and Destination site details in JSON format",
+      "mandatory": true,
+      "value": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "End to End Execution Automation Script",
+  "description": "Automation Script for performing end to end execution",
+  "type": "powershell",
+  "parameters": [
+    {
+      "name": "InputJson",
+      "type": "json",
+      "description": "Please provide the input details in JSON format",
+      "mandatory": true,
+      "value": ""
+    }
+  ]
+}
