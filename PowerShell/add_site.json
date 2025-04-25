@@ -1,0 +1,30 @@
+{
+  "executions": [
+    {
+      "execution_name": "",
+      "shift_server_ip": "",
+      "shift_username": "",
+      "shift_password": "",
+      "source_site_name": "",
+      "destination_site_name": "",
+      "vmware_config": {
+        "endpoint": "",
+        "username": "",
+        "password": "",
+        "skip_vmware_sll_validation": true
+      },
+      "ontap_config": {
+        "endpoint": "",
+        "username": "",
+        "password": "",
+        "skip_ontap_sll_validation": true
+      },
+      "hyperv_config": {
+        "endpoint": "",
+        "username": "",
+        "password": "",
+        "endpoint_type": ""
+      }
+    }
+  ]
+}

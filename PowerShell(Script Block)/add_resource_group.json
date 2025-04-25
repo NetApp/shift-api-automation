@@ -1,0 +1,14 @@
+{
+  "title": "Add Resource Group Automation Script",
+  "description": "Automation Script for Adding Resource Group",
+  "type": "powershell",
+  "parameters": [
+    {
+      "name": "InputJson",
+      "type": "json",
+      "description": "Please provide the Resource Group details in JSON format",
+      "mandatory": true,
+      "value": ""
+    }
+  ]
+}
