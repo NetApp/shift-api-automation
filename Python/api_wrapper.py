@@ -38,6 +38,7 @@ class APIWrapper:
                 if 'json_key' in kwargs:
                     if kwargs['json_key']:
                         json_key = kwargs.pop('json_key')
+            kwargs.setdefault("verify", False)
             response = requests.get(**kwargs)
             if json_key is not None:
                 if response.text:
@@ -62,6 +63,7 @@ class APIWrapper:
                     if 'json_key' in kwargs:
                         if kwargs['json_key']:
                             json_key = kwargs.pop("json_key")
+                    kwargs.setdefault("verify", False)
                     response = requests.post(**kwargs)
                     if json_key is not None:
                         if response.text:
@@ -84,6 +86,7 @@ class APIWrapper:
                         if 'json_key' in kwargs:
                             if kwargs['json_key']:
                                 json_key = kwargs.pop("json_key")
+                        kwargs.setdefault("verify", False)
                         response = requests.put(**kwargs)
                         if json_key is not None:
                             if response.text:
@@ -98,6 +101,7 @@ class APIWrapper:
         response = None
         try:
             if self._validate_kwargs(**kwargs) and kwargs['url']:
+                kwargs.setdefault("verify", False)
                 response = requests.delete(**kwargs)
         except Exception as e:
             self.logger.error("Error {} occurred while performing delete request for {}".format(e, kwargs))

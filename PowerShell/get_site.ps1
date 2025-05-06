@@ -43,7 +43,7 @@ function New-DromSession {
 
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -76,7 +76,7 @@ function End-DromSession {
 
     try {
         Log-Info "Ending session $SessionId"
-        $null = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $null = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         return $true
     } catch {
         Log-Error "Failed to end session $SessionId. Error: $_"
@@ -102,7 +102,7 @@ function Get-SiteList {
 
     try {
         Log-Info "Retrieving site list"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         return $response.list
     } catch {
         Log-Error "Failed to get site list. Error: $_"

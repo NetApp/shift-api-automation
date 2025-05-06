@@ -2,7 +2,7 @@
     "executions": [
       {
         "execution_name": "",
-        "shift_server_ip": "",
+        "shift_server_ip": "https://",
         "shift_username": "",
         "shift_password": "",
         "source_site_name": "",

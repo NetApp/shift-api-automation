@@ -47,7 +47,7 @@ function New-DromSession {
 
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -81,7 +81,7 @@ function End-DromSession {
 
     try {
         Log-Info "Ending session $SessionId"
-        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body | Out-Null
+        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck | Out-Null
         return $true
     }
     catch {
@@ -108,7 +108,7 @@ function Get-BlueprintStatus {
 
     try {
         Log-Info "Retrieving blueprint status via GET $url"
-        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers -SkipCertificateCheck
         Log-Info "Blueprint status successfully retrieved."
         return $response
     }
@@ -165,7 +165,7 @@ function Get-JobSteps {
 
     try {
         Log-Info "Retrieving job steps for execution id $ExecutionId via GET $url"
-        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers -SkipCertificateCheck
         Log-Info "Job steps successfully retrieved for execution id $ExecutionId"
         Log-Info "Job type for execution id $ExecutionId is $($response.type)"
         Log-Info "Job steps: $($response.steps | Out-String)"
@@ -223,7 +223,7 @@ function Get-Blueprint {
 
     try {
         Log-Info "Retrieving blueprint using GET /api/setup/drplan with URL $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ErrorAction Stop
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ErrorAction Stop -SkipCertificateCheck
         if ($response.fetchedCount -ne $null) {
             Log-Info "Retrieved blueprint count is $($response.fetchedCount)"
             return @{ blueprintCount = $response.fetchedCount; blueprintList = $response.list }

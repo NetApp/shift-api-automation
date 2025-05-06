@@ -1,6 +1,6 @@
 {
-  "title": "Get Site Automation Script",
-  "description": "Automation Script for fetching Source and Destination site details",
+  "title": "Get Site",
+  "description": "Automation Script for fetching Source and Destination site details sampleinput:get_site_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

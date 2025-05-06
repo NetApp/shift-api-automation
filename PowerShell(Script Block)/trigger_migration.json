@@ -1,6 +1,6 @@
 {
-  "title": "Trigger Migration Automation Script",
-  "description": "Automation Script for Triggering Migration",
+  "title": "Trigger Migration",
+  "description": "Automation Script for Triggering Migration sampleinput:trigger_migration_sample_data.json",
   "type": "powershell",
   "parameters": [
     {
