@@ -47,7 +47,7 @@ function New-DromSession {
     } | ConvertTo-Json
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -79,7 +79,7 @@ function End-DromSession {
     $body = @{ sessionId = "$SessionId" } | ConvertTo-Json
     try {
         Log-Info "Ending session $SessionId"
-        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body | Out-Null
+        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck | Out-Null
         return $true
     }
     catch {
@@ -182,7 +182,7 @@ function Add-Site {
     }
 
     try {
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 10)
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 10) -SkipCertificateCheck
         if ($response._id) {
             Log-Info "$SiteType site created with id: $($response._id)"
             return $response._id
@@ -213,7 +213,7 @@ function Get-SiteList {
     }
 
     try {
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         return $response.list
     } catch {
         Log-Error "Failed to get site list. Error: $_"
@@ -346,7 +346,7 @@ function Get-VMwareVirtEnv {
     }
     try {
         Log-Info "Getting VMware virtual environment details for site $SiteId from $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         if ($response.virtualizationEnvironments -and $response.virtualizationEnvironments.Count -gt 0) {
             Log-Info "Retrieved virtualization environment for site $SiteId : $($response.virtualizationEnvironments[0]._id)"
             return $response.virtualizationEnvironments[0]._id
@@ -381,7 +381,7 @@ function Get-UnprotectedVMList {
     }
     try {
         Log-Info "Fetching unprotected VMs list from $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         return $response.list
     }
     catch {
@@ -517,7 +517,7 @@ function Create-ResourceGroup {
 
         try {
             Log-Info "POST $url with payload for resource group '$rgName'"
-            $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 5)
+            $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 5) -SkipCertificateCheck
             if ($response -and $response._id) {
                 $rgId = $response._id
                 Log-Info "Resource group '$rgName' created with id: $rgId"
@@ -550,7 +550,7 @@ function Get-Blueprint {
          "netapp-sie-sessionid"=$SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response
     }
     catch {
@@ -596,7 +596,7 @@ function Get-Site {
          "netapp-sie-sessionid"=$SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response
     }
     catch {
@@ -644,7 +644,7 @@ function Get-SiteUsingSiteId {
          "netapp-sie-sessionid"=$SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          Log-Info "VMware site virtual environment details are $(ConvertTo-Json $response -Depth 5) for site id $SiteId"
          return $response
     }
@@ -693,7 +693,7 @@ function Get-AllResourceGroups {
          "netapp-sie-sessionid" = $SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response
     }
     catch {
@@ -747,7 +747,7 @@ function Get-ResourcesBySiteVirtenvId {
          "netapp-sie-sessionid" = $SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response.list
     }
     catch {
@@ -922,7 +922,7 @@ function Create-Blueprint {
     }
     $body = $blueprintPayload | ConvertTo-Json -Depth 10
     try {
-         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
          if ($response._id) {
              Log-Info "Blueprint id created is $($response._id)"
              return $response._id
@@ -961,7 +961,7 @@ function Run-ComplianceCheck {
         }
 
         Log-Info "Executing compliance check for blueprint id $BlueprintId at $url"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -TimeoutSec 300
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -TimeoutSec 300 -SkipCertificateCheck
 
         $compliance_status = $response.status
         $compliance_task_id = $response.taskId
@@ -991,7 +991,7 @@ function Run-ComplianceCheck {
             $statusUrl = $builder.Uri.AbsoluteUri
 
             Log-Info "Checking compliance status for task id $compliance_task_id at $statusUrl (Attempt $($i + 1))"
-            $statusResponse = Invoke-RestMethod -Method Post -Uri $statusUrl -Headers $headers -TimeoutSec 300
+            $statusResponse = Invoke-RestMethod -Method Post -Uri $statusUrl -Headers $headers -TimeoutSec 300 -SkipCertificateCheck
             $current_status = $statusResponse.status
             $compliance_result = $statusResponse.result
 
@@ -1051,7 +1051,7 @@ function Trigger-Migration {
 
     try {
          Log-Info "Executing blueprint id $BlueprintId with mode $MigrationMode using URL $url"
-         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -ErrorAction Stop
+         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -ErrorAction Stop -SkipCertificateCheck
          if ($response._id) { 
               Log-Info "Blueprint $BlueprintId executed with mode $MigrationMode successfully with id $($response._id)."
               return $response._id
@@ -1124,7 +1124,7 @@ function Get-BlueprintStatus {
 
     try {
         Log-Info "Retrieving blueprint status via GET $url"
-        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers -SkipCertificateCheck
         Log-Info "Blueprint status successfully retrieved."
         return $response
     }
@@ -1181,7 +1181,7 @@ function Get-JobSteps {
 
     try {
         Log-Info "Retrieving job steps for execution id $ExecutionId via GET $url"
-        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers -SkipCertificateCheck
         Log-Info "Job steps successfully retrieved for execution id $ExecutionId"
         Log-Info "Job type for execution id $ExecutionId is $($response.type)"
         Log-Info "Job steps: $($response.steps | Out-String)"
@@ -1266,7 +1266,7 @@ function Get-Blueprint {
 
     try {
         Log-Info "Retrieving blueprint using GET /api/setup/drplan with URL $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ErrorAction Stop
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ErrorAction Stop -SkipCertificateCheck
         if ($response.fetchedCount -ne $null) {
             Log-Info "Retrieved blueprint count is $($response.fetchedCount)"
             return @{ blueprintCount = $response.fetchedCount; blueprintList = $response.list }

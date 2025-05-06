@@ -1,6 +1,6 @@
 {
-  "title": "End to End Execution Automation Script",
-  "description": "Automation Script for performing end to end execution",
+  "title": "End to End Execution",
+  "description": "Automation Script for performing end to end execution sampleinput:shift_api_automation_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

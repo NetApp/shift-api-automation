@@ -1,6 +1,6 @@
 {
-  "title": "Check Migration Status Automation Script",
-  "description": "Automation Script for Checking Migration Status",
+  "title": "Check Migration Status",
+  "description": "Automation Script for Checking Migration Status sampleinput:check_migration_status_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

@@ -1,6 +1,6 @@
 {
-  "title": "Add Resource Group Automation Script",
-  "description": "Automation Script for Adding Resource Group",
+  "title": "Add Resource Groups",
+  "description": "Automation Script for Adding Resource Group sampleinput:add_resource_group_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

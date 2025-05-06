@@ -47,7 +47,7 @@ function New-DromSession {
 
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -81,7 +81,7 @@ function End-DromSession {
 
     try {
         Log-Info "Ending session $SessionId"
-        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body | Out-Null
+        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck | Out-Null
         return $true
     }
     catch {
@@ -107,7 +107,7 @@ function Get-BlueprintStatus {
     Write-Log "INFO" "Retrieving blueprint status using GET $url"
 
     try {
-        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers -ErrorAction Stop
+        $response = Invoke-RestMethod -Method GET -Uri $url -Headers $headers -ErrorAction Stop -SkipCertificateCheck
         Write-Log "INFO" "Response code for Blueprint status is 200"
         return $response
     }
@@ -172,7 +172,7 @@ function Get-Blueprint {
 
     try {
         Log-Info "Retrieving blueprint using GET /api/setup/drplan with URL $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ErrorAction Stop
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -ErrorAction Stop -SkipCertificateCheck
         if ($response.fetchedCount -ne $null) {
             Log-Info "Retrieved blueprint count is $($response.fetchedCount)"
             return @{ blueprintCount = $response.fetchedCount; blueprintList = $response.list }

@@ -44,7 +44,7 @@ function New-DromSession {
     $body = @{ loginId = $Username; password = $Password } | ConvertTo-Json
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -76,7 +76,7 @@ function End-DromSession {
     $body = @{ sessionId = "$SessionId" } | ConvertTo-Json
     try {
         Log-Info "Ending session $SessionId"
-        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body | Out-Null
+        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck | Out-Null
         return $true
     }
     catch {
@@ -100,7 +100,7 @@ function Get-Blueprint {
          "netapp-sie-sessionid"=$SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response
     }
     catch {
@@ -146,7 +146,7 @@ function Get-Site {
          "netapp-sie-sessionid"=$SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response
     }
     catch {
@@ -194,7 +194,7 @@ function Get-SiteUsingSiteId {
          "netapp-sie-sessionid"=$SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          Log-Info "VMware site virtual environment details are $(ConvertTo-Json $response -Depth 5) for site id $SiteId"
          return $response
     }
@@ -243,7 +243,7 @@ function Get-AllResourceGroups {
          "netapp-sie-sessionid" = $SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response
     }
     catch {
@@ -297,7 +297,7 @@ function Get-ResourcesBySiteVirtenvId {
          "netapp-sie-sessionid" = $SessionId
     }
     try {
-         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+         $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
          return $response.list
     }
     catch {
@@ -472,7 +472,7 @@ function Create-Blueprint {
     }
     $body = $blueprintPayload | ConvertTo-Json -Depth 10
     try {
-         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
          if ($response._id) {
              Log-Info "Blueprint id created is $($response._id)"
              return $response._id

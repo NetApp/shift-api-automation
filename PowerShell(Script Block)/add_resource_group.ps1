@@ -46,7 +46,7 @@ function Get-VMwareVirtEnv {
     }
     try {
         Log-Info "Getting VMware virtual environment details for site $SiteId from $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         if ($response.virtualizationEnvironments -and $response.virtualizationEnvironments.Count -gt 0) {
             Log-Info "Retrieved virtualization environment for site $SiteId : $($response.virtualizationEnvironments[0]._id)"
             return $response.virtualizationEnvironments[0]._id
@@ -81,7 +81,7 @@ function Get-UnprotectedVMList {
     }
     try {
         Log-Info "Fetching unprotected VMs list from $url"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         return $response.list
     }
     catch {
@@ -107,7 +107,7 @@ function New-DromSession {
 
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -141,7 +141,7 @@ function End-DromSession {
 
     try {
         Log-Info "Ending session $SessionId"
-        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body | Out-Null
+        Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck | Out-Null
         return $true
     }
     catch {
@@ -275,7 +275,7 @@ function Create-ResourceGroup {
 
         try {
             Log-Info "POST $url with payload for resource group '$rgName'"
-            $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 5)
+            $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 5) -SkipCertificateCheck
             if ($response -and $response._id) {
                 $rgId = $response._id
                 Log-Info "Resource group '$rgName' created with id: $rgId"
@@ -310,7 +310,7 @@ function Get-Site {
 
     try {
         Log-Info "Retrieving site list"
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         return $response.list
     } catch {
         Log-Error "Failed to get site list. Error: $_"

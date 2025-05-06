@@ -1,6 +1,6 @@
 {
-  "title": "Check Prepare VM Status Automation Script",
-  "description": "Automation Script for Checking Prepare VM Status",
+  "title": "Check Prepare VM Status",
+  "description": "Automation Script for Checking Prepare VM Status sampleinput:check_prepare_vm_status_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

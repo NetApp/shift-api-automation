@@ -1,6 +1,6 @@
 {
-  "title": "Run Compliance Check Automation Script",
-  "description": "Automation Script for Running Compliance Check",
+  "title": "Run Compliance Check",
+  "description": "Automation Script for Running Compliance Check sampleinput:run_compliance_check_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

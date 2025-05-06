@@ -1,6 +1,6 @@
 {
-  "title": "Create Blueprint Automation Script",
-  "description": "Automation Script for Creating Blueprint",
+  "title": "Create Blueprint",
+  "description": "Automation Script for Creating Blueprint sampleinput:create_blueprint_sample_data.json",
   "type": "powershell",
   "parameters": [
     {

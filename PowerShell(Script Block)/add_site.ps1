@@ -49,7 +49,7 @@ function New-DromSession {
 
     try {
         Log-Info "Creating session for user: $Username"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
         }
@@ -82,7 +82,7 @@ function End-DromSession {
 
     try {
         Log-Info "Ending session $SessionId"
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         return $true
     } catch {
         Log-Error "Failed to end session $SessionId. Error: $_"
@@ -184,7 +184,7 @@ function Add-Site {
     }
 
     try {
-        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 10)
+        $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body ($payload | ConvertTo-Json -Depth 10) -SkipCertificateCheck
         if ($response._id) {
             Log-Info "$SiteType site created with id: $($response._id)"
             return $response._id
@@ -215,7 +215,7 @@ function Get-SiteList {
     }
 
     try {
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $headers -SkipCertificateCheck
         return $response.list
     } catch {
         Log-Error "Failed to get site list. Error: $_"

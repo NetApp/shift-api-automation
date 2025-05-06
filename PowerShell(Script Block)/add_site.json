@@ -1,6 +1,6 @@
 {
-  "title": "Add Site Automation Script",
-  "description": "Automation Script for Adding Source and Destination sites",
+  "title": "Add Site",
+  "description": "Automation Script for Adding Source and Destination sites sampleinput:add_site_sample_data.json",
   "type": "powershell",
   "parameters": [
     {
