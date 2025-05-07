@@ -32,7 +32,7 @@ function Log-Error {
 function New-DromSession {
     param (
         [string]$Username,
-        [string]$Password,
+        [SecureString]$Password,
         [object]$Config
     )
     $baseUri = [Uri]$Config.shift_server_ip
@@ -41,7 +41,8 @@ function New-DromSession {
     $builder.Path = "api/tenant/session"
     $url = $builder.Uri.AbsoluteUri
     $headers = @{ "Content-Type" = "application/json" }
-    $body = @{ loginId = $Username; password = $Password } | ConvertTo-Json
+    $unsecurePassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
+    $body = @{ loginId = $Username; password = $unsecurePassword } | ConvertTo-Json
     try {
         Log-Info "Creating session for user: $Username"
         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
@@ -503,7 +504,8 @@ try {
         }
         $migrationMode = $currentConfig.migration_mode
         if (-not $migrationMode) { $migrationMode = "full" }
-        $sessionId = New-DromSession -Username $shift_username -Password $shift_password -Config $currentConfig
+        $securePassword = ConvertTo-SecureString $shift_password -AsPlainText -Force
+        $sessionId = New-DromSession -Username $shift_username -Password $securePassword -Config $currentConfig
         if (-not $sessionId) {
             Log-Error "Failed to create session for create blueprint index $($idx + 1). Skipping this create blueprint."
             continue
