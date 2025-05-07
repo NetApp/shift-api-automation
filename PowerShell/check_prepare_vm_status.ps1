@@ -29,7 +29,7 @@ function Log-Error {
 function New-DromSession {
     param (
         [string]$Username,
-        [string]$Password,
+        [SecureString]$Password,
         [object]$Config
     )
     $baseUri = [Uri]$Config.shift_server_ip
@@ -37,10 +37,9 @@ function New-DromSession {
     $builder.Port = 3698
     $builder.Path = "api/tenant/session"
     $url = $builder.Uri.AbsoluteUri
-
     $headers = @{ "Content-Type" = "application/json" }
-    $body = @{ loginId = $Username; password = $Password } | ConvertTo-Json
-
+    $unsecurePassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
+    $body = @{ loginId = $Username; password = $unsecurePassword } | ConvertTo-Json
     try {
         Log-Info "Creating session for user: $Username"
         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
@@ -258,7 +257,8 @@ try {
             continue
         }
 
-        $sessionId = New-DromSession -Username $shiftUsername -Password $shiftPassword -Config $prepareVMConfig
+        $securePassword = ConvertTo-SecureString $shift_password -AsPlainText -Force
+        $sessionId = New-DromSession -Username $shiftUsername -Password $securePassword -Config $prepareVMConfig
         if (-not $sessionId) {
             Write-Log "ERROR" "Failed to create session for prepare vm index $executionIndex. Skipping."
             $executionIndex++
