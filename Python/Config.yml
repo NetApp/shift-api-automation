@@ -21,3 +21,6 @@ shift_api_automation:
 
 trigger_migration:
   ifile : "/trigger_migration.json"
+  
+initiate_prepare_vm:
+  ifile : "/initiate_prepare_vm.json"

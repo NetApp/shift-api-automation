@@ -274,6 +274,30 @@ class BluePrintAPI:
         else:
             logger.error(f"Failed to execute blueprint {blueprint_id} with mode {execution_type}, Response code is {response_status_code}, response message is {response_txt}")
             return False
+    
+    def initiate_prepare_vm(self, session_id, logger, blueprint_id):
+        logger.info(f"Executing blueprint id {blueprint_id}")
+        url = self.uri + f":3704/api/recovery/drPlan/{blueprint_id}/preparevm/execution"
+        headers = {
+            'Content-Type': 'application/json',
+            'netapp-sie-sessionid': session_id
+        }
+        payload = {
+            "serviceAccounts": {
+                "common": {
+                    "loginId": None,
+                    "password": None
+                },
+                "vms": []
+            }
+        }
+        response_status_code, response_txt, json_dic = self.api.api_request(method='POST', url=url, json=payload, headers=headers, json_key=['_id'])
+        if response_status_code == 200:
+            logger.info(f"Initiated Prepare VM for Blueprint {blueprint_id} was executed successfully with id {json_dic['_id']}, Response code is {response_status_code}")
+            return json_dic['_id']
+        else:
+            logger.error(f"Failed to initiate Prepare VM for Blueprint blueprint {blueprint_id}, Response code is {response_status_code}, response message is {response_txt}")
+            return False
 
     def get_blueprint_status(self, session_id, logger):
         logger.info(f"Retrieving blueprint status using GET /api/recovery/drplan/status")

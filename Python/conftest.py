@@ -32,6 +32,9 @@ try:
         
     class trigger_migration_config():
         ifile = source_dir + cfg["trigger_migration"]["ifile"] 
+    
+    class initiate_prepare_vm_config():
+        ifile = source_dir + cfg["initiate_prepare_vm"]["ifile"] 
 
 except Exception as e:
     logger.error("Exception {} occurred while parsing config file")

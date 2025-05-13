@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 continue
 
             source_site_name = add_resource_group_config_data.get("source_site_name")
-            dest_site_name = add_resource_group_config_data.get("dest_site_name")
+            dest_site_name = add_resource_group_config_data.get("destination_site_name")
             if not source_site_name or not dest_site_name:
                 logger.error(f"Missing site IDs for resource group index {idx}. Skipping this resource group.")
                 continue
