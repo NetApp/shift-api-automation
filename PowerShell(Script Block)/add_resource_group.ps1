@@ -93,7 +93,7 @@ function Get-UnprotectedVMList {
 function New-DromSession {
     param (
         [string]$Username,
-        [SecureString]$Password,
+        [string]$Password,
         [object]$Config
     )
     $baseUri = [Uri]$Config.shift_server_ip
@@ -101,9 +101,10 @@ function New-DromSession {
     $builder.Port = 3698
     $builder.Path = "api/tenant/session"
     $url = $builder.Uri.AbsoluteUri
+
     $headers = @{ "Content-Type" = "application/json" }
-    $unsecurePassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
-    $body = @{ loginId = $Username; password = $unsecurePassword } | ConvertTo-Json
+    $body = @{ loginId = $Username; password = $Password } | ConvertTo-Json
+
     try {
         Log-Info "Creating session for user: $Username"
         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
@@ -357,8 +358,8 @@ try {
             continue
         }
 
-        $securePassword = ConvertTo-SecureString $shift_password -AsPlainText -Force
-        $sessionId = New-DromSession -Username $shiftUsername -Password $securePassword -Config $entry
+
+        $sessionId = New-DromSession -Username $shiftUsername -Password $shiftPassword -Config $entry
         if (-not $sessionId) {
             Log-Error "Failed to create session for resource group index $workflowIndex. Skipping this execution."
             continue

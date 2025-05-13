@@ -58,3 +58,7 @@ def shift_api_automation_logger():
 def trigger_migration_logger():
     trigger_migration_folder = os.path.join(LOGS_FOLDER, "Trigger Migration Execution Logs")
     return get_logger("TriggerMigration", trigger_migration_folder, "TriggerMigration")
+
+def initiate_prepare_vm_logger():
+    initiate_prepare_vm_folder = os.path.join(LOGS_FOLDER, "Initiate PrepareVM Execution Logs")
+    return get_logger("InitiatePrepareVM", initiate_prepare_vm_folder, "InitiatePrepareVM")
