@@ -34,10 +34,12 @@ function Log-Error {
 
 function New-DromSession {
     param (
-        [string]$Username,
-        [string]$Password,
+        [Parameter(Mandatory)]
+        [PSCredential]$Credential,
+
         [object]$Config
     )
+
     $baseUri = [Uri]$Config.shift_server_ip
     $builder = New-Object System.UriBuilder($baseUri)
     $builder.Port = 3698
@@ -45,10 +47,14 @@ function New-DromSession {
     $url = $builder.Uri.AbsoluteUri
 
     $headers = @{ "Content-Type" = "application/json" }
-    $body = @{ loginId = $Username; password = $Password } | ConvertTo-Json
+
+    $username = $Credential.UserName
+    $password = $Credential.GetNetworkCredential().Password
+
+    $body = @{ loginId = $username; password = $password } | ConvertTo-Json
 
     try {
-        Log-Info "Creating session for user: $Username"
+        Log-Info "Creating session for user: $username"
         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
@@ -57,7 +63,8 @@ function New-DromSession {
             Log-Error "Session creation did not return a valid session id."
             return $null
         }
-    } catch {
+    }
+    catch {
         Log-Error "Session creation failed. Error: $_"
         return $null
     }
@@ -353,7 +360,9 @@ try {
             continue
         }
 
-        $sessionId = New-DromSession -Username $shift_username -Password $shift_password -Config $execution
+        $securePassword = ConvertTo-SecureString $shift_password -AsPlainText -Force
+        $credential = New-Object System.Management.Automation.PSCredential ($shift_username, $securePassword)
+        $sessionId = New-DromSession -Credential $credential -Config $execution
         if (-not $sessionId) {
             Log-Error "Unable to create session for index $($idx + 1). Skipping."
             continue

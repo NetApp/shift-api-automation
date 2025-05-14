@@ -31,22 +31,27 @@ function Log-Error {
 
 function New-DromSession {
     param (
-        [string]$Username,
-        [string]$Password,
+        [Parameter(Mandatory)]
+        [PSCredential]$Credential,
+
         [object]$Config
     )
+
     $baseUri = [Uri]$Config.shift_server_ip
     $builder = New-Object System.UriBuilder($baseUri)
     $builder.Port = 3698
     $builder.Path = "api/tenant/session"
     $url = $builder.Uri.AbsoluteUri
+
     $headers = @{ "Content-Type" = "application/json" }
-    $body = @{
-        loginId  = $Username
-        password = $Password
-    } | ConvertTo-Json
+
+    $username = $Credential.UserName
+    $password = $Credential.GetNetworkCredential().Password
+
+    $body = @{ loginId = $username; password = $password } | ConvertTo-Json
+
     try {
-        Log-Info "Creating session for user: $Username"
+        Log-Info "Creating session for user: $username"
         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
@@ -233,8 +238,10 @@ try {
         $shift_password = $currentConfig.shift_password
         $blueprint_name = $currentConfig.blueprint_name
 
+        $securePassword = ConvertTo-SecureString $shift_password -AsPlainText -Force
+        $credential = New-Object System.Management.Automation.PSCredential ($shift_username, $securePassword)
+        $sessionId = New-DromSession -Credential $credential -Config $currentConfig
 
-        $sessionId = New-DromSession -Username $shift_username -Password $shift_password -Config $currentConfig
         if (-not $sessionId) {
             Log-Error "Failed to create session for run_compliance_check index $($idx + 1). Skipping this run_compliance_check."
             continue
