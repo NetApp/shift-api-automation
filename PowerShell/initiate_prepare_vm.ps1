@@ -27,19 +27,27 @@ function Log-Error {
 
 function New-DromSession {
     param (
-        [string]$Username,
-        [string]$Password,
+        [Parameter(Mandatory)]
+        [PSCredential]$Credential,
+
         [object]$Config
     )
+
     $baseUri = [Uri]$Config.shift_server_ip
     $builder = New-Object System.UriBuilder($baseUri)
     $builder.Port = 3698
     $builder.Path = "api/tenant/session"
     $url = $builder.Uri.AbsoluteUri
+
     $headers = @{ "Content-Type" = "application/json" }
-    $body = @{ loginId = $Username; password = $Password } | ConvertTo-Json
+
+    $username = $Credential.UserName
+    $password = $Credential.GetNetworkCredential().Password
+
+    $body = @{ loginId = $username; password = $password } | ConvertTo-Json
+
     try {
-        Log-Info "Creating session for user: $Username"
+        Log-Info "Creating session for user: $username"
         $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $body -SkipCertificateCheck
         if ($response.session -and $response.session._id) {
             return $response.session._id
@@ -279,8 +287,10 @@ function Initiate-PrepareVM-Workflow {
         Log-Error "Missing required details for Prepare VM index $($Index + 1). Skipping this Initiation of Prepare VM."
         return
     }
+    $securePassword = ConvertTo-SecureString $shift_password -AsPlainText -Force
+    $credential = New-Object System.Management.Automation.PSCredential ($shift_username, $securePassword)
+    $sessionId = New-DromSession -Credential $credential -Config $InitiatePrepareVMConfig
 
-    $sessionId = New-DromSession -Username $shift_username -Password $shift_password -Config $InitiatePrepareVMConfig
     if (-not $sessionId) {
         Log-Error "Failed to create session for Prepare VM index $($Index + 1). Skipping this Initiation of Prepare VM."
         return
