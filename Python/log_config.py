@@ -62,3 +62,7 @@ def trigger_migration_logger():
 def initiate_prepare_vm_logger():
     initiate_prepare_vm_folder = os.path.join(LOGS_FOLDER, "Initiate PrepareVM Execution Logs")
     return get_logger("InitiatePrepareVM", initiate_prepare_vm_folder, "InitiatePrepareVM")
+
+def get_site_logger():
+    get_site_folder = os.path.join(LOGS_FOLDER, "Get Site Execution Logs")
+    return get_logger("GetSite", get_site_folder, "GetSite")

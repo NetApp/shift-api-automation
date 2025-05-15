@@ -24,3 +24,6 @@ trigger_migration:
   
 initiate_prepare_vm:
   ifile : "/initiate_prepare_vm.json"
+
+get_site:
+  ifile : "/get_site.json"
