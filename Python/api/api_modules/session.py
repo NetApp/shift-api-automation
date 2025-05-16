@@ -18,7 +18,7 @@ class SessionAPI:
         if response_status_code == 200 and json_dic['session']['_id'] is not None:
             return json_dic['session']['_id']
         else:
-            return False
+            raise Exception("Invalid credentials provided.")
 
     def end_drom_session(self, session_id):
         url = self.uri + ":3698/api/tenant/session/end"

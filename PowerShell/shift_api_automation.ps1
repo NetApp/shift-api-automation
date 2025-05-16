@@ -58,8 +58,7 @@ function New-DromSession {
         }
     }
     catch {
-        Log-Error "Session creation failed. Error: $_"
-        return $null
+        throw "Invalid credentials provided."
     }
 }
 
