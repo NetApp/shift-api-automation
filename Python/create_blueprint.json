@@ -10,7 +10,7 @@
         "migration_mode": "",
         "vm_details": [
           {
-            "name": "netplan_ubuntu",
+            "name": "",
             "boot_order": 3,
             "delay": 0,
             "numCPUs": 2,
