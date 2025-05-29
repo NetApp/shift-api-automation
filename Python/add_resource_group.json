@@ -13,26 +13,9 @@
             "name": "",
             "boot_order": 3,
             "delay": 0,
-            "numCPUs": 2,
-            "memoryMB": 4096,
-            "ip": "",
-            "vmGeneration": "1",
-            "isSecureBootEnable": false,
-            "retainMacAddress": false,
-            "networkDetails": [
-              "",
-              ""
-            ],
             "qtree_name": "",
             "datastore_name": "",
-            "resource_group_name": "",
-            "ipAllocType": "",
-            "powerOnFlag": true,
-            "serviceAccountOverrideFlag": true,
-            "serviceAccount": {
-              "loginId": "",
-              "password": ""
-            }
+            "resource_group_name": ""
           }
         ]
       }
