@@ -1,0 +1,11 @@
+{
+    "executions": [
+      {
+        "execution_name": "",
+        "shift_server_ip": "https://",
+        "shift_username": "",
+        "shift_password": "",
+        "blueprint_details": [{"bp1name": "true", "bp2name":"false"}]
+      }
+    ]
+  }
